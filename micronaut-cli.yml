@@ -1,0 +1,5 @@
+profile: service
+defaultPackage: nps.laa
+---
+testFramework: junit
+sourceLanguage: java
