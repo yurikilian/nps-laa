@@ -7,7 +7,7 @@ import io.reactivex.Single;
 
 import java.util.List;
 
-@Client("/ingest")
+@Client("${micronaut.application.name}")
 public interface IngestClient extends IngestOperations {
 
     @Override

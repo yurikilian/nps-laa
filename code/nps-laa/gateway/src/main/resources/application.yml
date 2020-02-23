@@ -1,0 +1,20 @@
+micronaut:
+  application:
+    name: nps-laa-gateway
+
+  server:
+    port: -1
+
+endpoints:
+  health:
+    enabled: true
+    details-visible: ANONYMOUS
+    status:
+      http-mapping:
+        DONW: 500
+
+consul:
+  client:
+    registration:
+      enabled: true
+    defaultZone: "${CONSUL_HOST:localhost}:${CONSUL_PORT:8500}"

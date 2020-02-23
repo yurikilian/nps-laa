@@ -1,8 +1,8 @@
 micronaut:
   application:
-    name: nps-laa
+    name: nps-laa-ingest-service
   server:
-    port: 8080
+    port: -1
 
 endpoints:
   health:
@@ -14,3 +14,9 @@ endpoints:
 
 mongodb:
   uri: mongodb://localhost:27017
+
+consul:
+  client:
+    registration:
+      enabled: true
+    defaultZone: "${CONSUL_HOST:localhost}:${CONSUL_PORT:8500}"

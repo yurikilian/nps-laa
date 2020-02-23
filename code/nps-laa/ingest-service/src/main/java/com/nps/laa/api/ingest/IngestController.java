@@ -8,7 +8,7 @@ import io.reactivex.Single;
 import java.util.List;
 
 
-@Controller("/ingest")
+@Controller
 public class IngestController implements IngestOperations {
     private final IngestHandler handler;
 
