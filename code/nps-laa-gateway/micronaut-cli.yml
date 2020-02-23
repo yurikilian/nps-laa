@@ -1,0 +1,5 @@
+profile: service
+defaultPackage: nps.laa.gateway
+---
+testFramework: junit
+sourceLanguage: java

@@ -1,0 +1,5 @@
+profile: service
+defaultPackage: nps.laa.metrics
+---
+testFramework: junit
+sourceLanguage: java
