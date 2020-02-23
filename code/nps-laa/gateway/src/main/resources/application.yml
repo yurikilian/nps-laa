@@ -2,9 +2,6 @@ micronaut:
   application:
     name: nps-laa-gateway
 
-  server:
-    port: -1
-
 endpoints:
   health:
     enabled: true
@@ -12,6 +9,14 @@ endpoints:
     status:
       http-mapping:
         DONW: 500
+
+tracing:
+  zipkin:
+    enabled: true
+    http:
+      url: http://localhost:9411
+    sampler:
+      probability: 1
 
 consul:
   client:

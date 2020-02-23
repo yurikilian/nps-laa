@@ -2,9 +2,9 @@ package com.nps.laa.service.ingest;
 
 import io.micronaut.runtime.Micronaut;
 
-public class Application {
+public class IngestApplication {
 
     public static void main(String[] args) {
-        Micronaut.run(Application.class);
+        Micronaut.run(IngestApplication.class);
     }
 }
