@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import javax.inject.Inject;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @MicronautTest
 public class IngestControllerTest {
@@ -32,18 +32,18 @@ public class IngestControllerTest {
     }
 
     @Test
-    public void shouldReturnOkGivenEmptyRequest(){
+    public void shouldReturnOkGivenEmptyRequest() {
         final HttpResponse<?> response = ingestClient.ingest(List.of()).blockingGet();
         assertEquals(HttpStatus.OK, response.status());
     }
 
     @Test
-    public void shouldReturnBadRequestGivenIncorrectRequest(){
+    public void shouldReturnBadRequestGivenIncorrectRequest() {
         final Single<HttpResponse<?>> single = ingestClient.ingest(List.of(""));
 
         try {
             final HttpResponse<?> response = single.blockingGet();
-        } catch (HttpClientResponseException e){
+        } catch (HttpClientResponseException e) {
             assertEquals(HttpStatus.BAD_REQUEST, e.getStatus());
         }
     }

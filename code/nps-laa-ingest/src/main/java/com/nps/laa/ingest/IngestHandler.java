@@ -23,7 +23,7 @@ public class IngestHandler {
     Single<List<AccessLog>> handle(final List<String> accessLogs) {
         final var logs = accessLogs.stream().map(mapper).collect(Collectors.toList());
 
-        if(logs.isEmpty()) {
+        if (logs.isEmpty()) {
             return Single.just(Collections.emptyList());
         }
 

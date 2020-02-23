@@ -8,7 +8,7 @@ import io.reactivex.Single;
 import java.util.List;
 
 @Client("/ingest")
-public interface IngestClient extends IngestOperations{
+public interface IngestClient extends IngestOperations {
 
     @Override
     Single<HttpResponse<?>> ingest(@Body List<String> accessLogs);

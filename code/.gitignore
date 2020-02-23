@@ -2,7 +2,7 @@ Thumbs.db
 .DS_Store
 .gradle
 build/
-target/
+nps-laa-ingest/target/
 out/
 .idea
 *.iml
@@ -11,3 +11,4 @@ out/
 .project
 .settings
 .classpath
+.mvn
