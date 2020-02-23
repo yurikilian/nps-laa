@@ -2,9 +2,9 @@ package com.nps.laa.api.metrics;
 
 import io.micronaut.runtime.Micronaut;
 
-public class Application {
+public class MetricsApplication {
 
     public static void main(String[] args) {
-        Micronaut.run(Application.class);
+        Micronaut.run(MetricsApplication.class);
     }
 }

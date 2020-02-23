@@ -1,3 +1,17 @@
 micronaut:
   application:
     name: nps-laa-metrics
+  server:
+    port: 8081
+
+
+endpoints:
+  health:
+    enabled: true
+    details-visible: ANONYMOUS
+    status:
+      http-mapping:
+        DONW: 500
+
+mongodb:
+  uri: mongodb://localhost:27017
