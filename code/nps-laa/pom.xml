@@ -12,8 +12,9 @@
     <packaging>pom</packaging>
     <modules>
         <module>gateway</module>
-        <module>ingest</module>
-        <module>metrics</module>
-        <module>api</module>
+        <module>ingest-service</module>
+        <module>ingest-service-api</module>
+        <module>metrics-service</module>
+        <module>metrics-service-api</module>
     </modules>
 </project>

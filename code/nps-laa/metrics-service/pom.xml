@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.nps.laa</groupId>
     <artifactId>metrics-service</artifactId>
-    <version>0.1</version>
+    <version>1.0.0</version>
     <properties>
         <micronaut.version>1.3.2</micronaut.version>
         <jdk.version>11</jdk.version>
@@ -12,7 +12,7 @@
         <maven.compiler.source>${jdk.version}</maven.compiler.source>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <exec.mainClass>com.nps.laa.api.metrics.MetricsApplication</exec.mainClass>
+        <exec.mainClass>com.nps.laa.service.metrics.MetricsApplication</exec.mainClass>
         <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
         <maven-failsafe-plugin.version>2.22.2</maven-failsafe-plugin.version>
     </properties>
@@ -73,6 +73,11 @@
             <artifactId>logback-classic</artifactId>
             <version>1.2.3</version>
             <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.nps.laa</groupId>
+            <artifactId>metrics-service-api</artifactId>
+            <version>1.0.0</version>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
