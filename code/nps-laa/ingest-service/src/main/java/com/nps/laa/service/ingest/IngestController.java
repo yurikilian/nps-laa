@@ -11,9 +11,9 @@ import java.util.List;
 
 @Controller
 public class IngestController implements IngestOperations {
-    private final IngestHandler handler;
+    private final IngestService handler;
 
-    public IngestController(IngestHandler handler) {
+    public IngestController(IngestService handler) {
         this.handler = handler;
     }
 

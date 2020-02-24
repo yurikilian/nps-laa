@@ -14,7 +14,7 @@ public class MetricsControllerTest {
 
 
     @Inject
-    private MetricsServiceTestClient client;
+    private MetricsTestClient client;
 
     @Test
     public void shouldReturnOkWithEmptyResponseGivenEmptyRequest() throws Exception {

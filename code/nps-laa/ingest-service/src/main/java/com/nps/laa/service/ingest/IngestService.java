@@ -2,6 +2,8 @@ package com.nps.laa.service.ingest;
 
 import com.mongodb.reactivestreams.client.MongoClient;
 import com.mongodb.reactivestreams.client.MongoCollection;
+import com.nps.laa.service.ingest.domain.mapper.AccessLogMapper;
+import com.nps.laa.service.ingest.domain.AccessLog;
 import io.reactivex.Single;
 
 import javax.inject.Singleton;
@@ -10,12 +12,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Singleton
-public class IngestHandler {
+public class IngestService {
 
     private final AccessLogMapper mapper;
     private final MongoClient mongoClient;
 
-    public IngestHandler(AccessLogMapper mapper, MongoClient mongoClient) {
+    public IngestService(AccessLogMapper mapper, MongoClient mongoClient) {
         this.mapper = mapper;
         this.mongoClient = mongoClient;
     }

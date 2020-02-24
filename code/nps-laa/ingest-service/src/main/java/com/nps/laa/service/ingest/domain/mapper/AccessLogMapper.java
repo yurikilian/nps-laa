@@ -1,4 +1,7 @@
-package com.nps.laa.service.ingest;
+package com.nps.laa.service.ingest.domain.mapper;
+
+import com.nps.laa.service.ingest.domain.AccessLog;
+import com.nps.laa.service.ingest.domain.exception.AccessLogBadFormatException;
 
 import javax.inject.Singleton;
 import java.time.Instant;

@@ -1,4 +1,4 @@
-package com.nps.laa.service.ingest;
+package com.nps.laa.service.ingest.domain.exception;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.http.HttpRequest;

@@ -1,4 +1,4 @@
-package com.nps.laa.service.ingest;
+package com.nps.laa.service.ingest.domain.exception;
 
 public class AccessLogBadFormatException extends RuntimeException {
     public AccessLogBadFormatException(final String line) {

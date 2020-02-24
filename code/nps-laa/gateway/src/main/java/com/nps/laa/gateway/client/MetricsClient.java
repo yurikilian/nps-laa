@@ -4,5 +4,5 @@ import com.nps.laa.MetricsOperations;
 import io.micronaut.http.client.annotation.Client;
 
 @Client("nps-laa-metrics")
-public interface MetricsServiceClient extends MetricsOperations {
+public interface MetricsClient extends MetricsOperations {
 }
