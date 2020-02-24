@@ -1,0 +1,7 @@
+---
+micronaut:
+  application:
+    name: metrics-calculator
+---
+rabbitmq:
+  uri: amqp://localhost:5672

@@ -16,5 +16,6 @@
         <module>ingest-service-api</module>
         <module>metrics-service</module>
         <module>metrics-service-api</module>
+        <module>metrics-calculator</module>
     </modules>
 </project>

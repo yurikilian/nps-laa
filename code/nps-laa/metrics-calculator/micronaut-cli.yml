@@ -1,0 +1,5 @@
+profile: rabbitmq
+defaultPackage: metrics.calculator
+---
+testFramework: junit
+sourceLanguage: java

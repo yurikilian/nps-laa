@@ -1,6 +1,8 @@
 micronaut:
   application:
     name: nps-laa-gateway
+  server:
+    port: 8080
 
 endpoints:
   health:
