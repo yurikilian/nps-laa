@@ -14,8 +14,8 @@
         <module>gateway</module>
         <module>ingest-service</module>
         <module>ingest-service-api</module>
-        <module>metrics-service</module>
-        <module>metrics-service-api</module>
-        <module>metrics-calculator</module>
+        <module>analytics-service</module>
+        <module>analytics-service-api</module>
+        <module>analytics-aggregator</module>
     </modules>
 </project>
