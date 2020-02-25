@@ -1,7 +1,7 @@
 package com.nps.laa.gateway;
 
 
-import com.nps.laa.AnalyticsOperations;
+import com.nps.laa.analytics.AnalyticsOperations;
 import com.nps.laa.gateway.client.AnalyticsClient;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.annotation.Controller;

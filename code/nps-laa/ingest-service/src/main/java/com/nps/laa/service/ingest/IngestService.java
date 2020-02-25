@@ -3,6 +3,7 @@ package com.nps.laa.service.ingest;
 import com.mongodb.reactivestreams.client.MongoClient;
 import com.mongodb.reactivestreams.client.MongoCollection;
 import com.mongodb.reactivestreams.client.Success;
+import com.nps.laa.service.ingest.configuration.AccessLogEventProducer;
 import com.nps.laa.service.ingest.domain.mapper.AccessLogMapper;
 import com.nps.laa.service.ingest.domain.AccessLog;
 import io.reactivex.Single;

@@ -1,4 +1,4 @@
-package com.nps.laa.service.ingest;
+package com.nps.laa.service.ingest.configuration;
 
 
 import com.nps.laa.service.ingest.domain.AccessLog;

@@ -1,4 +1,4 @@
-package com.nps.laa;
+package com.nps.laa.analytics;
 
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.annotation.Get;

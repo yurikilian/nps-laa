@@ -1,6 +1,6 @@
 package com.nps.laa.gateway.client;
 
-import com.nps.laa.IngestOperations;
+import com.nps.laa.analytics.ingest.IngestOperations;
 import io.micronaut.http.client.annotation.Client;
 
 @Client("nps-laa-ingest-service")

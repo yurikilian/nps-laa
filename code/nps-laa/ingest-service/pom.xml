@@ -111,7 +111,7 @@
         </dependency>
         <dependency>
             <groupId>com.nps.laa</groupId>
-            <artifactId>ingest-service-api</artifactId>
+            <artifactId>nps-laa-api</artifactId>
             <version>1.0.0</version>
         </dependency>
         <dependency>

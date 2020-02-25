@@ -1,6 +1,6 @@
 package com.nps.laa.service.metrics;
 
-import com.nps.laa.AnalyticsOperations;
+import com.nps.laa.analytics.AnalyticsOperations;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.annotation.Controller;
 import io.reactivex.Single;

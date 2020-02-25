@@ -1,6 +1,6 @@
 package com.nps.laa.gateway;
 
-import com.nps.laa.IngestOperations;
+import com.nps.laa.analytics.ingest.IngestOperations;
 import com.nps.laa.gateway.client.IngestClient;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.annotation.Controller;

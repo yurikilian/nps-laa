@@ -1,4 +1,4 @@
-package com.nps.laa;
+package com.nps.laa.analytics.ingest;
 
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.MediaType;
