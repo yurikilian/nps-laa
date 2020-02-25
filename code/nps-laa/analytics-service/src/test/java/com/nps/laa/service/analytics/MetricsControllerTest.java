@@ -12,13 +12,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @MicronautTest
 public class MetricsControllerTest {
 
-
     @Inject
     private AnalyticsTestClient client;
 
     @Test
     public void shouldReturnOkWithEmptyResponseGivenEmptyRequest() throws Exception {
-        final HttpResponse<?> response = client.query().blockingGet();
+        final HttpResponse<?> response = client.query(null).blockingGet();
         assertEquals(HttpStatus.OK, response.getStatus());
     }
 }

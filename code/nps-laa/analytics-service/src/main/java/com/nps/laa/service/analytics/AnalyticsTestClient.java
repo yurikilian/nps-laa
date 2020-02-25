@@ -1,4 +1,4 @@
-package com.nps.laa.gateway.client;
+package com.nps.laa.service.analytics;
 
 import com.nps.laa.analytics.AnalyticsOperations;
 import io.micronaut.http.HttpResponse;
@@ -10,8 +10,8 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 
-@Client("nps-laa-analytics")
-public interface AnalyticsClient extends AnalyticsOperations {
+@Client("/")
+public interface AnalyticsTestClient extends AnalyticsOperations {
 
     @Override
     Single<HttpResponse<List<String>>> query(@Nullable @Valid Map<String, String> params);
