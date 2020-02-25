@@ -1,4 +1,4 @@
-package metrics.calculator;
+package com.nps.laa.metrics;
 
 import java.time.LocalDateTime;
 

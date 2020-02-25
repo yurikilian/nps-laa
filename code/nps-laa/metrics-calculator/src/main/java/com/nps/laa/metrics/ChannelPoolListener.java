@@ -1,4 +1,4 @@
-package metrics.calculator;
+package com.nps.laa.metrics;
 
 import com.rabbitmq.client.BuiltinExchangeType;
 import com.rabbitmq.client.Channel;

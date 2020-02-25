@@ -36,11 +36,10 @@ public class IngestService {
             .doOnSuccess(success -> logs.forEach(producer::send));
     }
 
-
     private MongoCollection<AccessLog> getCollection() {
         return
             mongoClient.getDatabase("laa")
-                .getCollection("access-log", AccessLog.class);
+                .getCollection("accesslog", AccessLog.class);
     }
 
 }

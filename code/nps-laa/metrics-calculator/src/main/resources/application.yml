@@ -1,7 +1,9 @@
----
 micronaut:
   application:
     name: metrics-calculator
----
+
 rabbitmq:
   uri: amqp://localhost:5672
+
+mongodb:
+  uri: mongodb://localhost:27017
