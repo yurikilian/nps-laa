@@ -12,7 +12,7 @@
         <maven.compiler.source>${jdk.version}</maven.compiler.source>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <exec.mainClass>com.nps.laa.metrics.AnalyticsAggregatorApplication</exec.mainClass>
+        <exec.mainClass>com.nps.laa.analytics.AnalyticsAggregatorApplication</exec.mainClass>
         <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
         <maven-failsafe-plugin.version>2.22.2</maven-failsafe-plugin.version>
     </properties>
@@ -65,7 +65,6 @@
             <groupId>io.micronaut.configuration</groupId>
             <artifactId>micronaut-mongo-reactive</artifactId>
         </dependency>
-
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
@@ -86,6 +85,11 @@
             <groupId>io.micronaut.test</groupId>
             <artifactId>micronaut-test-junit5</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.nps.laa</groupId>
+            <artifactId>nps-laa-api</artifactId>
+            <version>1.0.0</version>
         </dependency>
     </dependencies>
     <build>

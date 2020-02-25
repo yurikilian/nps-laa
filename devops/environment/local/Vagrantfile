@@ -1,0 +1,58 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+Vagrant.configure("2") do |config|
+  config.vm.box = "ubuntu/bionic64"
+  config.vm.network "forwarded_port", guest: 80, host: 8080
+  config.vm.network "forwarded_port", guest: 8080, host: 8090
+
+
+  # Share an additional folder to the guest VM. The first argument is
+  # the path on the host to the actual folder. The second argument is
+  # the path on the guest to mount the folder. And the optional third
+  # argument is a set of non-required options.
+  # config.vm.synced_folder "../data", "/vagrant_data"
+
+  # Provider-specific configuration so you can fine-tune various
+  # backing providers for Vagrant. These expose provider-specific options.
+  # Example for VirtualBox:
+  #
+   config.vm.provider "virtualbox" do |vb|
+     vb.memory = "1024"
+   end
+  #
+  # View the documentation for the provider you are using for more
+  # information on available options.
+
+  # Enable provisioning with a shell script. Additional provisioners such as
+  # Ansible, Chef, Docker, Puppet and Salt are also available. Please see the
+  # documentation for more information about their specific syntax and use.
+
+  $install_jenkins = <<-SHELL
+    wget http://mirror.serverion.com/jenkins/war-stable/2.204.2/jenkins.war --progress=bar:force
+    export JENKINS_HOME=/opt/jenkins_configuration
+    java -jar jenkins.war
+  SHELL
+
+  $install_java = <<-SHELL
+    apt-get install -y openjdk-11-jdk openjdk-11-jdk-headless maven
+  SHELL
+
+  $install_sonarqube = <<-SHELL
+    cd /tmp
+    sudo wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-7.9.1.zip
+    unzip sonarqube-7.9.1.zip -d /opt
+    mv /opt/sonarqube-7.9.1 /opt/sonarqube
+    groupadd sonar
+    useradd -c "user to run SonarQube" -d /opt/sonarqube -g sonar sonar 
+    chown sonar:sonar /opt/sonarqube -R
+  SHELL
+
+
+
+  config.vm.synced_folder "jenkins_home/", "/opt/jenkins_configuration"
+  config.vm.provision "shell", inline: "apt-get update"
+  config.vm.provision "shell", inline: $install_java
+
+  config.vm.provision "shell", inline: $install_jenkins
+
+end

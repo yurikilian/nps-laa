@@ -7,3 +7,10 @@ rabbitmq:
 
 mongodb:
   uri: mongodb://localhost:27017
+
+
+
+event:
+  exchange: npa-laa
+  queue: access-logs
+  routingKey: npa-access-logs
