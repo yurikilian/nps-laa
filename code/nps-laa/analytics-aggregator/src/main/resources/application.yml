@@ -8,9 +8,9 @@ rabbitmq:
 mongodb:
   uri: mongodb://localhost:27017
 
-
+database: "laa"
 
 event:
-  exchange: npa-laa
+  exchange: nps-laa
   queue: access-logs
   routingKey: npa-access-logs

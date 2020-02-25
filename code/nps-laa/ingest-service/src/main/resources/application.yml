@@ -23,13 +23,12 @@ tracing:
 mongodb:
   uri: mongodb://localhost:27017
 
+database: "laa"
+collection: "accesslog"
+
 consul:
   client:
     registration:
       enabled: true
     defaultZone: "${CONSUL_HOST:localhost}:${CONSUL_PORT:8500}"
 
-event:
-  exchange: npa-laa
-  queue: access-logs
-  routingKey: npa-access-logs

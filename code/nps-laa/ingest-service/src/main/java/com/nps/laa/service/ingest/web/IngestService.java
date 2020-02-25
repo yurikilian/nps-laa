@@ -4,8 +4,9 @@ import com.mongodb.reactivestreams.client.MongoClient;
 import com.mongodb.reactivestreams.client.MongoCollection;
 import com.mongodb.reactivestreams.client.Success;
 import com.nps.laa.ingest.AccessLog;
+import com.nps.laa.service.ingest.event.AccessLogCreationEventProducer;
 import com.nps.laa.service.ingest.web.mapper.AccessLogMapper;
-import com.nps.laa.service.ingest.event.EventProducer;
+import io.micronaut.context.annotation.Value;
 import io.reactivex.Single;
 
 import javax.inject.Singleton;
@@ -15,11 +16,22 @@ import java.util.stream.Collectors;
 @Singleton
 public class IngestService {
 
+
+    private final String database;
+    private final String collection;
+
     private final AccessLogMapper mapper;
     private final MongoClient mongoClient;
-    private final EventProducer producer;
+    private final AccessLogCreationEventProducer producer;
 
-    public IngestService(AccessLogMapper mapper, MongoClient mongoClient, EventProducer producer) {
+
+    public IngestService(@Value("${database}") String database,
+                         @Value("${collection}") String collection,
+                         AccessLogMapper mapper,
+                         MongoClient mongoClient,
+                         AccessLogCreationEventProducer producer) {
+        this.database = database;
+        this.collection = collection;
         this.mapper = mapper;
         this.mongoClient = mongoClient;
         this.producer = producer;
@@ -34,13 +46,23 @@ public class IngestService {
 
         return Single.fromPublisher(getCollection()
             .insertMany(logs))
-            .doOnSuccess(success -> logs.forEach(producer::send));
+            .doOnSuccess(success -> logs.forEach(accessLog -> {
+
+                producer.send(accessLog).subscribe((o, throwable) -> {
+                    System.out.println(o);
+
+                    if (throwable != null)
+                        throwable.printStackTrace();
+
+
+                });
+            }));
     }
 
     private MongoCollection<AccessLog> getCollection() {
         return
-            mongoClient.getDatabase("laa")
-                .getCollection("accesslog", AccessLog.class);
+            mongoClient.getDatabase(this.database)
+                .getCollection(this.collection, AccessLog.class);
     }
 
 }

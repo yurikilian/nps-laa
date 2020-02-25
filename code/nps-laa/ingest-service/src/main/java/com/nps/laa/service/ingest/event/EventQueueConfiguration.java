@@ -11,20 +11,12 @@ import java.io.IOException;
 @Singleton
 public class EventQueueConfiguration extends ChannelInitializer {
 
-    @Value("${event.exchange}")
-    private String exchange;
-
-    @Value("${event.queue}")
-    private String queue;
-
-    @Value("${event.routingKey}")
-    private String routingKey;
 
     @Override
     public void initialize(Channel channel) throws IOException {
-        channel.exchangeDeclare(exchange, BuiltinExchangeType.DIRECT);
-        channel.queueDeclare(queue, true, false, false, null);
-        channel.queueBind(queue, exchange, routingKey);
+        channel.exchangeDeclare("nps", BuiltinExchangeType.DIRECT);
+        channel.queueDeclare("log", true, false, false, null);
+        channel.queueBind("log", "nps", "log.creation");
     }
 
 }

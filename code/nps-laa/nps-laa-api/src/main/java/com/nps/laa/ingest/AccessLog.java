@@ -4,16 +4,37 @@ import java.time.LocalDateTime;
 
 public class AccessLog {
 
-    private final String endpoint;
-    private final LocalDateTime timestamp;
-    private final String userId;
-    private final String region;
+    private String endpoint;
+    private LocalDateTime timestamp;
+    private String userId;
+    private String region;
+
+
+    public AccessLog() {
+    }
 
     private AccessLog(Builder builder) {
         this.endpoint = builder.endpoint;
         this.timestamp = builder.timestamp;
         this.userId = builder.userId;
         this.region = builder.region;
+    }
+
+
+    public void setEndpoint(String endpoint) {
+        this.endpoint = endpoint;
+    }
+
+    public void setTimestamp(LocalDateTime timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
     }
 
     public static Builder builder() {

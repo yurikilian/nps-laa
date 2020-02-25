@@ -4,11 +4,12 @@ package com.nps.laa.service.ingest.event;
 import com.nps.laa.ingest.AccessLog;
 import io.micronaut.configuration.rabbitmq.annotation.Binding;
 import io.micronaut.configuration.rabbitmq.annotation.RabbitClient;
+import io.reactivex.Single;
 
-@RabbitClient
-public interface EventProducer {
+@RabbitClient("nps")
+public interface AccessLogCreationEventProducer {
 
-    @Binding("${event.routingKey}")
-    void send(AccessLog accessLog);
+    @Binding("log.creation")
+    Single<?> send(AccessLog accessLog);
 
 }
