@@ -8,7 +8,6 @@ import io.reactivex.Single;
 
 import javax.annotation.Nullable;
 import javax.validation.Valid;
-import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -21,7 +20,7 @@ public class AnalyticsController implements AnalyticsOperations {
     }
 
     @Get("/{?params*}")
-    public Single<HttpResponse<List<String>>> query(@Valid @Nullable Map<String, String> params) {
+    public Single<HttpResponse<?>> query(@Valid @Nullable Map<String, String> params) {
         return analyticsService.query(params);
     }
 

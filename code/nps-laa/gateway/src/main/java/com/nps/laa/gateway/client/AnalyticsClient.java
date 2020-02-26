@@ -7,12 +7,11 @@ import io.reactivex.Single;
 
 import javax.annotation.Nullable;
 import javax.validation.Valid;
-import java.util.List;
 import java.util.Map;
 
 @Client("nps-laa-analytics")
 public interface AnalyticsClient extends AnalyticsOperations {
 
     @Override
-    Single<HttpResponse<List<String>>> query(@Nullable @Valid Map<String, String> params);
+    Single<HttpResponse<?>> query(@Nullable @Valid Map<String, String> params);
 }
