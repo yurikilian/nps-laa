@@ -37,7 +37,6 @@ public class AnalyticsService {
         final var database = mongoClient.getDatabase("laa");
 
         return Flowable.fromPublisher(topInTheWorldAnalyticsService.get(database.getCollection("totalcount"), params))
-
             .mergeWith(topInTheWorldByRegionAnalyticsService.get(database.getCollection("totalcountregion"), params))
             .mergeWith(lessAccessInTheWorldAnalyticsService.get(database.getCollection("totalcount"), params))
             .mergeWith(theMinuteWithMoreAccess.get(database.getCollection("totalcounttimestamp"), params))
