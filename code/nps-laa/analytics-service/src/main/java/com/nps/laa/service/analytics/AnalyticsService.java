@@ -2,10 +2,7 @@ package com.nps.laa.service.analytics;
 
 
 import com.mongodb.reactivestreams.client.MongoClient;
-import com.nps.laa.service.analytics.domain.model.LessAccessInTheWorldAnalyticsService;
-import com.nps.laa.service.analytics.domain.model.TheMinuteWithMoreAccess;
-import com.nps.laa.service.analytics.domain.model.TopInTheWorldAnalyticsService;
-import com.nps.laa.service.analytics.domain.model.TopInTheWorldByRegionAnalyticsService;
+import com.nps.laa.service.analytics.domain.model.*;
 import io.micronaut.http.HttpResponse;
 import io.reactivex.Flowable;
 import io.reactivex.Single;
@@ -33,6 +30,9 @@ public class AnalyticsService {
     @Inject
     private TheMinuteWithMoreAccess theMinuteWithMoreAccess;
 
+    @Inject
+    private AccessPerPeriodAnalyticsService accessPerPeriodAnalyticsService;
+
     public Single<HttpResponse<?>> query(@Valid Map<String, String> params) {
         final var database = mongoClient.getDatabase("laa");
 
@@ -40,6 +40,7 @@ public class AnalyticsService {
             .mergeWith(topInTheWorldByRegionAnalyticsService.get(database.getCollection("totalcountregion"), params))
             .mergeWith(lessAccessInTheWorldAnalyticsService.get(database.getCollection("totalcount"), params))
             .mergeWith(theMinuteWithMoreAccess.get(database.getCollection("totalcounttimestamp"), params))
+            .mergeWith(accessPerPeriodAnalyticsService.get(database.getCollection("accesslog"), params))
             .toList()
             .map(HttpResponse::ok);
     }
