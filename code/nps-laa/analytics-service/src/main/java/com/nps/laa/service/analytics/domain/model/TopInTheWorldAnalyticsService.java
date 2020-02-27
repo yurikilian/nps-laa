@@ -20,13 +20,11 @@ public class TopInTheWorldAnalyticsService implements AnalyticsQueryService {
                 .find()
                 .limit(3)
                 .sort(descending("count")))
-            .map(document -> {
-                return Map.of(
-                    "Name", "Top 3 in world",
-                    "url", document.get("url"),
-                    "count", document.get("count")
-                );
-            });
+            .map(document -> Map.of(
+                "name", "Top 3 in world",
+                "url", document.get("url"),
+                "count", document.get("count")
+            ));
     }
 
 }

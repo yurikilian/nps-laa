@@ -21,7 +21,7 @@ public class TopInTheWorldByRegionAnalyticsService implements AnalyticsQueryServ
                 .find().limit(3)
                 .sort(descending("count")))
             .map(document -> Map.of(
-                "Name", "Top 3 in world by region",
+                "name", "Top 3 in world by region",
                 "count", document.get("count"),
                 "region", document.get("region")
             ));

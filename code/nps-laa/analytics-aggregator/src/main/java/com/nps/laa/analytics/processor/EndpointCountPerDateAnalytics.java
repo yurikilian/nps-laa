@@ -31,8 +31,14 @@ public class EndpointCountPerDateAnalytics extends AbstractAnalyticsProcessor {
     @Override
     public void process(AccessLog accessLog) {
         getCollection().updateOne(
-            combine(eq("url", accessLog.getEndpoint()),
-                eq("timestamp", accessLog.getTimestamp())),
+            combine(
+                eq("url", accessLog.getEndpoint()),
+                eq("day", accessLog.getTimestamp().getDayOfMonth()),
+                eq("month", accessLog.getTimestamp().getMonthValue()),
+                eq("year", accessLog.getTimestamp().getYear()),
+                eq("hour", accessLog.getTimestamp().getHour()),
+                eq("minute", accessLog.getTimestamp().getMinute())
+            ),
             combine(inc("count", 1)),
 
             new UpdateOptions().upsert(true))

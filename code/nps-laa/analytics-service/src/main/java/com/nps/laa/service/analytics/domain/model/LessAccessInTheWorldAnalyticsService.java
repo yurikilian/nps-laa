@@ -23,7 +23,7 @@ public class LessAccessInTheWorldAnalyticsService implements AnalyticsQueryServi
                 .limit(1)
             )
             .map(document -> Map.of(
-                "Name", "Top 3 in world",
+                "name", "Less access in the world",
                 "url", document.get("url"),
                 "count", document.get("count")
             ));
