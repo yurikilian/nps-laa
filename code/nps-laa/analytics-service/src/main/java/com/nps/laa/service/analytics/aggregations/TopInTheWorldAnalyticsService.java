@@ -1,4 +1,4 @@
-package com.nps.laa.service.analytics.domain.model;
+package com.nps.laa.service.analytics.aggregations;
 
 import com.mongodb.reactivestreams.client.MongoCollection;
 import io.reactivex.Flowable;
@@ -10,20 +10,18 @@ import java.util.Map;
 import static com.mongodb.client.model.Sorts.descending;
 
 @Singleton
-public class LessAccessInTheWorldAnalyticsService implements AnalyticsQueryService {
+public class TopInTheWorldAnalyticsService implements AnalyticsQueryService {
 
     @Override
     public Flowable<Map<String, Object>> get(MongoCollection<Document> collection,
                                              Map<String, String> params) {
-
         return Flowable
             .fromPublisher(collection
                 .find()
-                .sort(descending("count"))
-                .limit(1)
-            )
+                .limit(3)
+                .sort(descending("count")))
             .map(document -> Map.of(
-                "name", "Less access in the world",
+                "name", "Top 3 in world",
                 "url", document.get("url"),
                 "count", document.get("count")
             ));

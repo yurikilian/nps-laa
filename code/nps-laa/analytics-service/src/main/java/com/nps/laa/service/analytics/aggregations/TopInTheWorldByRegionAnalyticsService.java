@@ -1,4 +1,4 @@
-package com.nps.laa.service.analytics.domain.model;
+package com.nps.laa.service.analytics.aggregations;
 
 import com.mongodb.reactivestreams.client.MongoCollection;
 import io.reactivex.Flowable;
