@@ -7,6 +7,14 @@ Vagrant.configure("2") do |config|
   config.vm.network "forwarded_port", guest: 9411, host: 9411
   config.vm.network "forwarded_port", guest: 15672, host: 15672
   config.vm.network "forwarded_port", guest: 8500, host: 8500
+  config.vm.network "forwarded_port", guest: 8600, host: 8600
+  config.vm.network "forwarded_port", guest: 8301, host: 8301
+  config.vm.network "forwarded_port", guest: 8302, host: 8302
+  config.vm.network "forwarded_port", guest: 8300, host: 8300
+  config.vm.network "forwarded_port", guest: 21000, host: 21000
+  config.vm.network "forwarded_port", guest: 21255, host: 21255
+
+  config.vm.network "forwarded_port", guest: 8080, host: 8080
 
   config.vm.synced_folder "../../../code/nps-laa", "/opt/code", create: true
 
@@ -34,10 +42,6 @@ Vagrant.configure("2") do |config|
     apt-get install rabbitmq-server -y
     service rabbitmq-server start
     rabbitmq-plugins enable rabbitmq_management
-    rabbitmqctl add_user admin password
-    rabbitmqctl set_user_tags admin administrator
-    rabbitmqctl set_permissions -p / admin ".*" ".*" ".*"
-    rabbitmqctl delete_user guest
     service rabbitmq-server restart
   SHELL
 
@@ -55,9 +59,19 @@ Vagrant.configure("2") do |config|
     echo "FINISHED VAGRANT CONFIGURATION" 
   SHELL
 
+  $installMicroservices = <<-SHELL
+    cd /opt/code && mvn clean package -DskipTests
+
+    java -jar gateway/target/gateway.jar &> gateway.log &
+    java -jar ingest-service/target/ingest-service.jar &> ingest.log &
+    java -jar analytics-aggregator/target/analytics-aggregator.jar &> aggregator.log &
+    java -jar analytics-service/target/analytics-service.jar &> analytics.log &
+  SHELL
+
   config.vm.provision "shell", inline: $installRabbit
   config.vm.provision "shell", inline: $installMongo
   config.vm.provision "shell", inline: $installJava
   config.vm.provision "shell", inline: $installZipkin
   config.vm.provision "shell", inline: $installConsul
+  config.vm.provision "shell", inline: $installMicroservices
 end

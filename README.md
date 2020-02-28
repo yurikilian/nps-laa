@@ -6,12 +6,13 @@ The java stack (reactivex + micronaut) and devops (vagrant) was learned at test 
 So, I must thank you for the opportunity to learn a new framework meanwhile make this test for Ilegra :).
 Sadly I didn't accomplish the automation task and the tests. Sorry. 
 
-##### All the anwser are present on text folder
+#### All the anwsers are present on text folder
 
 
-
-### TO RUN THE POC
+### TO RUN THE POC:
 cd into devops/environment/local and run vagrant up 
+
+This vagrant file runs a local environment with the microservices, rabbit mq, mongodb, zipkin and consul.
 
 #### Request examples
 ```sh
