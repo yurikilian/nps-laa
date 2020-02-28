@@ -8,6 +8,9 @@ Vagrant.configure("2") do |config|
   config.vm.network "forwarded_port", guest: 15672, host: 15672
   config.vm.network "forwarded_port", guest: 8500, host: 8500
 
+  config.vm.synced_folder "../../../../code", "/opt/code", create: true
+
+
   $installJava = <<-SHELL
     apt-get update
     apt-get install -y openjdk-11-jdk
@@ -49,9 +52,8 @@ Vagrant.configure("2") do |config|
     unzip consul_1.7.1_linux_amd64.zip
     ./consul agent -dev -node machine >> consul.log &
 
-    echo "FINISHED VAGRAN CONFIGURATION" 
+    echo "FINISHED VAGRANT CONFIGURATION" 
   SHELL
-
 
   config.vm.provision "shell", inline: $installRabbit
   config.vm.provision "shell", inline: $installMongo
