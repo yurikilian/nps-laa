@@ -1,58 +1,61 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
+
 Vagrant.configure("2") do |config|
-  config.vm.box = "ubuntu/bionic64"
-  config.vm.network "forwarded_port", guest: 80, host: 8080
-  config.vm.network "forwarded_port", guest: 8080, host: 8090
+  config.vm.box = "hashicorp/bionic64"
 
+  config.vm.network "forwarded_port", guest: 9411, host: 9411
+  config.vm.network "forwarded_port", guest: 15672, host: 15672
+  config.vm.network "forwarded_port", guest: 8500, host: 8500
 
-  # Share an additional folder to the guest VM. The first argument is
-  # the path on the host to the actual folder. The second argument is
-  # the path on the guest to mount the folder. And the optional third
-  # argument is a set of non-required options.
-  # config.vm.synced_folder "../data", "/vagrant_data"
-
-  # Provider-specific configuration so you can fine-tune various
-  # backing providers for Vagrant. These expose provider-specific options.
-  # Example for VirtualBox:
-  #
-   config.vm.provider "virtualbox" do |vb|
-     vb.memory = "1024"
-   end
-  #
-  # View the documentation for the provider you are using for more
-  # information on available options.
-
-  # Enable provisioning with a shell script. Additional provisioners such as
-  # Ansible, Chef, Docker, Puppet and Salt are also available. Please see the
-  # documentation for more information about their specific syntax and use.
-
-  $install_jenkins = <<-SHELL
-    wget http://mirror.serverion.com/jenkins/war-stable/2.204.2/jenkins.war --progress=bar:force
-    export JENKINS_HOME=/opt/jenkins_configuration
-    java -jar jenkins.war
+  $installJava = <<-SHELL
+    apt-get update
+    apt-get install -y openjdk-11-jdk
+    apt-get install maven -y
   SHELL
 
-  $install_java = <<-SHELL
-    apt-get install -y openjdk-11-jdk openjdk-11-jdk-headless maven
+  $installMongo = <<-SHELL
+    wget -qO - https://www.mongodb.org/static/pgp/server-4.2.asc |  apt-key add -
+    echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.2 multiverse" |  tee /etc/apt/sources.list.d/mongodb-org-4.2.list
+    apt-get update
+    apt-get install -y mongodb-org
+    systemctl start mongod
+    systemctl status mongod
   SHELL
 
-  $install_sonarqube = <<-SHELL
-    cd /tmp
-    sudo wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-7.9.1.zip
-    unzip sonarqube-7.9.1.zip -d /opt
-    mv /opt/sonarqube-7.9.1 /opt/sonarqube
-    groupadd sonar
-    useradd -c "user to run SonarQube" -d /opt/sonarqube -g sonar sonar 
-    chown sonar:sonar /opt/sonarqube -R
+  $installRabbit = <<-SHELL
+    echo "deb http://www.rabbitmq.com/debian/ testing main"  | tee /etc/apt/sources.list.d/rabbitmq.list > /dev/null
+    wget http://www.rabbitmq.com/rabbitmq-signing-key-public.asc
+    apt-key add rabbitmq-signing-key-public.asc
+    apt-get update
+    apt-get install rabbitmq-server -y
+    service rabbitmq-server start
+    rabbitmq-plugins enable rabbitmq_management
+    rabbitmqctl add_user admin password
+    rabbitmqctl set_user_tags admin administrator
+    rabbitmqctl set_permissions -p / admin ".*" ".*" ".*"
+    rabbitmqctl delete_user guest
+    service rabbitmq-server restart
+  SHELL
+
+  $installZipkin = <<-SHELL
+    curl -sSL https://zipkin.io/quickstart.sh | bash -s
+    java -jar zipkin.jar >> zipkin.log &
+  SHELL
+
+  $installConsul = <<-SHELL
+    apt-get install unzip -y
+    wget https://releases.hashicorp.com/consul/1.7.1/consul_1.7.1_linux_amd64.zip
+    unzip consul_1.7.1_linux_amd64.zip
+    ./consul agent -dev -node machine >> consul.log &
+
+    echo "FINISHED VAGRAN CONFIGURATION" 
   SHELL
 
 
-
-  config.vm.synced_folder "jenkins_home/", "/opt/jenkins_configuration"
-  config.vm.provision "shell", inline: "apt-get update"
-  config.vm.provision "shell", inline: $install_java
-
-  config.vm.provision "shell", inline: $install_jenkins
-
+  config.vm.provision "shell", inline: $installRabbit
+  config.vm.provision "shell", inline: $installMongo
+  config.vm.provision "shell", inline: $installJava
+  config.vm.provision "shell", inline: $installZipkin
+  config.vm.provision "shell", inline: $installConsul
 end
